@@ -5,6 +5,10 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import kpiRoutes from './routes/kpi.js'
+
+// import KPI from './models/KPI.js'
+// import { kpis } from './data/data.js'
 
 /** CONFIGURATION */
 dotenv.config()
@@ -18,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 /** ROUTES */
+app.use('/kpi', kpiRoutes)
 
 /** MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000
@@ -31,23 +36,19 @@ const connectDB = async () => {
 
 		await mongoose.connection.db.admin().command({ ping: 1 })
 		console.log(
-			'Pinged your deployment. You successfully connected to MongoDB!'
+			`Pinged your deployment. You successfully connected to MongoDB!\nURI: ${conn.connection.host}\nDB: ${conn.connection.name}`
 		)
-		console.log(`MongoDB Connected ${conn.connection.host}`)
 		/** Add data one time only or as needed */
 		// await mongoose.connection.db.dropDatabase()
-		// KPI.insertMany(kpis)
-		// Porduct.insertMany(products)
-		// Transaction.insertMany(transactions)
+		// await KPI.insertMany(kpis)
+		// await Porduct.insertMany(products)
+		// await Transaction.insertMany(transactions)
 	} catch (error) {
 		console.log(`Error: ${error.message}`)
 		process.exit(1)
-	} finally {
-		// Ensures that the client will close when you finish/error
-		await mongoose.disconnect()
 	}
 }
 
-await connectDB().catch(console.dir)
+await connectDB()
 
-app.listen(() => console.log(`Server port: ${PORT || 9000}`))
+app.listen(PORT, () => console.log(`Server port: ${PORT || 9000}`))
