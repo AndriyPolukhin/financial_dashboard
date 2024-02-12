@@ -56,7 +56,7 @@ export const themeSettings = {
 			...tokens.secondary,
 			main: tokens.secondary[500],
 		},
-		tetriary: {
+		tertiary: {
 			...tokens.tertiary,
 		},
 		grey: {
