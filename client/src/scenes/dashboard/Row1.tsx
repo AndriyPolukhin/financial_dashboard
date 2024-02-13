@@ -16,7 +16,6 @@ import {
 	LineChart,
 	Bar,
 	BarChart,
-	Rectangle,
 } from 'recharts'
 const Row1 = () => {
 	const { data } = useGetKpisQuery()
