@@ -30,3 +30,14 @@ export interface GetKpisResponse {
 	createdAt: string
 	updatedAt: string
 }
+
+export interface GetProductsResponse {
+	id: string
+	_id: string
+	__v: number
+	price: number
+	expenses: number
+	transactions: Array<string>
+	createdAt: string
+	updatedAt: string
+}
