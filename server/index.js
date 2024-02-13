@@ -6,9 +6,14 @@ import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import kpiRoutes from './routes/kpi.js'
+import productRoutes from './routes/product.js'
+import transactionRoutes from './routes/transaction.js'
 
+/* TENP:  Seeding the database */
 // import KPI from './models/KPI.js'
-// import { kpis } from './data/data.js'
+// import Product from './models/Product.js'
+// import Transaction from './models/Transaction.js'
+// import { kpis, products, transactions } from './data/data.js'
 
 /** CONFIGURATION */
 dotenv.config()
@@ -23,6 +28,8 @@ app.use(cors())
 
 /** ROUTES */
 app.use('/kpi', kpiRoutes)
+app.use('/products', productRoutes)
+app.use('/transactions', transactionRoutes)
 
 /** MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000
@@ -41,7 +48,7 @@ const connectDB = async () => {
 		/** Add data one time only or as needed */
 		// await mongoose.connection.db.dropDatabase()
 		// await KPI.insertMany(kpis)
-		// await Porduct.insertMany(products)
+		// await Product.insertMany(products)
 		// await Transaction.insertMany(transactions)
 	} catch (error) {
 		console.log(`Error: ${error.message}`)
